@@ -6,7 +6,7 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:32:21 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/02/14 15:26:03 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/02/15 16:52:08 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -20,7 +20,7 @@
 typedef struct s_lst
 {
    long num;
-   size_t index;
+   int index;
    struct s_lst *prv;
    struct s_lst *nxt;
 } t_stack;

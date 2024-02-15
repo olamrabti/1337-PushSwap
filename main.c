@@ -57,7 +57,7 @@ int init_variables(t_stack **stack, t_LIS *var)
     return 0;
 }
 
-int *get_LIS(t_LIS *var)
+int *get_LIS(t_LIS *var) // returns LIS members indexes in stack
 {
     int *LIS;
 
@@ -68,7 +68,7 @@ int *get_LIS(t_LIS *var)
     var->j = var->length[var->highest];
     while (var->j)
     {
-        LIS[--(var->j)] = var->numbers[var->i];
+        LIS[--(var->j)] = var->i;
         var->i = var->sub[var->i];
     }
     return LIS;
@@ -112,8 +112,51 @@ static void print_stack(t_stack **list)
         printf(" [%ld] ", temp->num);
         temp = temp->nxt;
     }
-    printf("\n-----------\n");
+    printf("\n-------------------------------\n");
 }
+static int is_in_LIS(t_stack *stack, int *LIS)
+{
+    int i;
+
+    i = 0;
+    while (i < 6) // LIS len
+    {
+        if (stack->index == LIS[i++])
+            return 1;
+    }
+    return 0;
+}
+
+void move_nonLIS_to_b(t_stack **a, t_stack **b, int *LIS)
+{
+    t_stack *tmp;
+    t_stack *next_tmp;
+
+    tmp = *a;
+    while (tmp)
+    {
+        next_tmp = tmp->nxt;
+        if (!is_in_LIS(tmp, LIS))
+        {
+            if (tmp->prv)
+                tmp->prv->nxt = tmp->nxt;
+            if (tmp->nxt)
+                tmp->nxt->prv = tmp->prv;
+            tmp->nxt = NULL;
+            tmp->prv = NULL;
+            node_addback(b, tmp);
+        }
+        else
+            tmp = tmp->nxt;
+        tmp = next_tmp;
+    }
+    update_indexes(a);
+    update_indexes(b);
+}
+//  Result: DONE!
+// list :  [10]  [15]  [13]  [9]  [21]  [22]  [35]  [29]  [64]
+// a must be : [10]  [13]  [21]  [22]  [29]  [64]
+// b must be : [15] [9]  [35]
 int main()
 {
     t_stack *a;
@@ -127,30 +170,30 @@ int main()
     a = NULL;
     b = NULL;
     arr = NULL;
-    node_addback(&a, create_node(10, i++));
-    node_addback(&a, create_node(15, i++));
-    node_addback(&a, create_node(13, i++));
-    node_addback(&a, create_node(9, i++));
-    node_addback(&a, create_node(21, i++));
-    node_addback(&a, create_node(22, i++));
-    node_addback(&a, create_node(35, i++));
-    node_addback(&a, create_node(29, i++));
-    node_addback(&a, create_node(64, i++));
+    // node_addback(&a, create_node(10, i++));
+    // node_addback(&a, create_node(15, i++));
+    // node_addback(&a, create_node(13, i++));
+    // node_addback(&a, create_node(9, i++));
+    // node_addback(&a, create_node(21, i++));
+    // node_addback(&a, create_node(22, i++));
+    // node_addback(&a, create_node(35, i++));
+    // node_addback(&a, create_node(29, i++));
+    // node_addback(&a, create_node(64, i++));
 
     //  10 15 21 22 35
 
-    // node_addback(&a, create_node(0, i++));
-    // node_addback(&a, create_node(4, i++));
-    // node_addback(&a, create_node(12, i++));
-    // node_addback(&a, create_node(2, i++));
-    // node_addback(&a, create_node(10, i++));
-    // node_addback(&a, create_node(6, i++));
-    // node_addback(&a, create_node(9, i++));
-    // node_addback(&a, create_node(13, i++));
-    // node_addback(&a, create_node(3, i++));
-    // node_addback(&a, create_node(11, i++));
-    // node_addback(&a, create_node(7, i++));
-    // node_addback(&a, create_node(15, i++));  //  0 2 6 9 11 15
+    node_addback(&a, create_node(0, i++));
+    node_addback(&a, create_node(4, i++));
+    node_addback(&a, create_node(12, i++));
+    node_addback(&a, create_node(2, i++));
+    node_addback(&a, create_node(10, i++));
+    node_addback(&a, create_node(6, i++));
+    node_addback(&a, create_node(9, i++));
+    node_addback(&a, create_node(13, i++));
+    node_addback(&a, create_node(3, i++));
+    node_addback(&a, create_node(11, i++));
+    node_addback(&a, create_node(7, i++));
+    node_addback(&a, create_node(15, i++));  //  0 2 6 9 11 15
     // i = 0;
     // while (value <= 12)
     //     node_addback(&b, create_node(value++, i++));
@@ -162,19 +205,20 @@ int main()
     i = 0;
     printf("\n----- LIS : stack a -----\n\n");
     while (i < 6)
-        printf("[%d] ,", arr[i++]);
+        printf("[%d] ", arr[i++]);
+    move_nonLIS_to_b(&a, &b, arr);
     // printf("\n----- before : stack b -----\n\n");
     // print_stack(&b);
     // printf("len b: %zu\n", list_len(&b));
     // //---------------//move//--------------//
     // swap_both(&a, &b);
     // //-------------------------------------//
-    // printf("\n----- after : stack a -----\n\n");
-    // print_stack(&a);
+    printf("\n----- after : stack a -----\n\n");
+    print_stack(&a);
     // printf("len a: %zu\n", list_len(&a));
 
-    // printf("\n----- after : stack b -----\n\n");
-    // print_stack(&b);
+    printf("\n----- after : stack b -----\n\n");
+    print_stack(&b);
     // printf("len b: %zu\n", list_len(&b));
     //     rev_rot_stack(&a);
     //     rev_rot_stack(&b);
@@ -182,9 +226,9 @@ int main()
     //     print_stack(&a);
     //     printf("\n----- after 2 : stack b -----\n\n");
     //     print_stack(&b);
-    remove_list(&a);
-    remove_list(&b);
-    free(arr);
+    // remove_list(&a);
+    // remove_list(&b);
+    // free(arr);
 }
 
 // stopped here ----------------------------------------------------------
