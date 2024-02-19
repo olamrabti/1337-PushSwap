@@ -6,7 +6,7 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 19:17:40 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/02/14 12:35:54 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/02/17 15:11:22 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void rotate_stack(t_stack **stack)
     *stack = (*stack)->nxt;
     (*stack)->prv = NULL;
     node_addback(stack, temp);
-    update_indexes(stack);
 }
 
 void rotate_both(t_stack **b, t_stack **a)

@@ -6,7 +6,7 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 14:08:28 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/02/14 12:37:13 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:50:12 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ t_stack *create_node(long value, size_t index)
     node->nxt = NULL;
     node->num = value;
     node->index = index;
+    node->target_pos = index;
     return node;
 }
 
@@ -30,22 +31,25 @@ int node_addfront(t_stack **list, t_stack *new)
 {
     if (!list || !new)
         return 1;
+    new->prv = NULL;
     if (*list)
     {
         (*list)->prv = new;
         new->nxt = *list;
-        new->prv = NULL;
     }
+    else
+        new->nxt = NULL;              
     *list = new;
     return 0;
 }
 
-int node_addback(t_stack **list, t_stack *new) // maybe return void is better 
+int node_addback(t_stack **list, t_stack *new)
 {
     t_stack *temp;
 
     if (!list || !new)
         return 1;
+    new->nxt = NULL;
     if (!*list)
     {
         *list = new;
@@ -56,7 +60,6 @@ int node_addback(t_stack **list, t_stack *new) // maybe return void is better
         temp = temp->nxt;
     temp->nxt = new;
     new->prv = temp;
-    new->nxt = NULL;
     return 0;
 }
 

@@ -6,7 +6,7 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:30:10 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/02/14 12:36:12 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/02/17 10:24:00 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,7 +26,6 @@ void swap_elements(t_stack **stack)
     second->nxt = (*stack);
     second->prv = NULL;
     *stack = second;
-    update_indexes(stack);
 }
 // sb (swap b): Swap the first 2 elements at the top of stack b.
     // Do nothing if there is only one or no elements.

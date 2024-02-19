@@ -6,7 +6,7 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:29:59 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/02/14 12:35:35 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:21:05 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -25,7 +25,6 @@ void rev_rot_stack(t_stack **stack)
     temp->prv->nxt = NULL;
     temp->prv = NULL;  
     node_addfront(stack, temp);
-    update_indexes(stack);
 }
 
 // rrb (reverse rotate b): Shift down all elements of stack b by 1.

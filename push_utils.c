@@ -6,7 +6,7 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:29:53 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/02/14 12:35:19 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/02/19 17:24:29 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -26,6 +26,4 @@ void push_to_stack(t_stack **push_to, t_stack **from)
     if (*from)
         (*from)->prv = NULL;
     node_addfront(push_to, temp);
-    update_indexes(push_to);
-    update_indexes(from);
 }
