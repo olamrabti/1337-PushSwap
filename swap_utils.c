@@ -6,33 +6,32 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/12 17:30:10 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/02/17 10:24:00 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/02/29 14:39:01 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-
 #include "push_swap.h"
 
-// sa (swap a): Swap the first 2 elements at the top of stack a.
-    // Do nothing if there is only one or no elements.
-void swap_elements(t_stack **stack)
+void	swap_elements(t_stack **stack, char *print)
 {
-    t_stack *second;
-    if (!stack || list_len(stack) < 2)
-        return ;
-    second = (*stack)->nxt;
-    (*stack)->nxt = second->nxt;
-    (*stack)->prv = second;
-    second->nxt = (*stack);
-    second->prv = NULL;
-    *stack = second;
-}
-// sb (swap b): Swap the first 2 elements at the top of stack b.
-    // Do nothing if there is only one or no elements.
+	t_stack	*second;
 
-// ss : sa and sb at the same time.
-void swap_both(t_stack **a , t_stack **b)
+	if (!stack || list_len(stack) < 2)
+		return ;
+	second = (*stack)->nxt;
+	(*stack)->nxt = second->nxt;
+	(*stack)->prv = second;
+	second->nxt = (*stack);
+	second->prv = NULL;
+	*stack = second;
+	if (*print)
+		write(1, print, 3);
+}
+
+void	swap_both(t_stack **a, t_stack **b, char *print)
 {
-    swap_elements(a);
-    swap_elements(b);
+	swap_elements(a, "");
+	swap_elements(b, "");
+	if (*print)
+		write(1, print, 3);
 }

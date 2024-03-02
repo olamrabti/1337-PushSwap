@@ -6,102 +6,104 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/16 12:11:51 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/02/19 17:35:23 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/02/29 09:48:22 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
 #include "push_swap.h"
 
-void update_cost(t_stack **a, t_stack **b)
+void	update_cost(t_stack **a, t_stack **b)
 {
-    t_stack *tmp_a;
-    t_stack *tmp_b;
+	t_stack	*tmp_a;
+	t_stack	*tmp_b;
 
-    tmp_b = *b;
-    while (tmp_b)
-    {
-        tmp_a = *a;
-        while (tmp_a)
-        {
-            if (tmp_b->target_pos == tmp_a->pos)
-            {
-                tmp_b->cost += tmp_a->cost;
-                tmp_b->target_moves = tmp_a->moves;
-                break;
-            }
-            tmp_a = tmp_a->nxt;
-        }
-        tmp_b = tmp_b->nxt;
-    }
+	tmp_b = *b;
+	while (tmp_b)
+	{
+		tmp_a = *a;
+		while (tmp_a)
+		{
+			if (tmp_b->target_pos == tmp_a->pos)
+			{
+				tmp_b->cost += tmp_a->cost;
+				tmp_b->target_moves = tmp_a->moves;
+				break ;
+			}
+			tmp_a = tmp_a->nxt;
+		}
+		tmp_b = tmp_b->nxt;
+	}
 }
 
-void execute_moves(t_stack **a, t_stack **b)
+void	update_cheapest(t_stack **stack, t_moves *current)
 {
-    t_stack *tmp_a;
-    t_stack *tmp_b;
-    int cheapest;
-    int b_moves;
-    int a_moves;
+	t_stack	*tmp;
 
-    tmp_b = *b;
-    tmp_a = *a;
-    cheapest = INT_MAX;
+	tmp = *stack;
+	while (tmp)
+	{
+		if (tmp->cost < current->cheapest)
+		{
+			current->b_moves = tmp->moves;
+			current->a_moves = tmp->target_moves;
+			current->cheapest = tmp->cost;
+		}
+		tmp = tmp->nxt;
+	}
+}
 
-    // look for smallest cost in b
-    while (tmp_b)
-    {
-        if (tmp_b->cost < cheapest)
-        {
-            b_moves = tmp_b->moves;
-            a_moves = tmp_b->target_moves;
-            cheapest = tmp_b->cost;
-        }
-        tmp_b = tmp_b->nxt;
-    }
-    tmp_b = *b;
-    tmp_a = *a;
+void	execute_both(t_stack **a, t_stack **b, t_moves *current)
+{
+	while (current->a_moves > 0 && current->b_moves > 0)
+	{
+		rotate_both(b, a, "rr\n");
+		current->a_moves--;
+		current->b_moves--;
+	}
+	while (current->a_moves < 0 && current->b_moves < 0)
+	{
+		rev_rot_both(b, a, "rrr\n");
+		current->a_moves++;
+		current->b_moves++;
+	}
+}
 
-    while (a_moves || b_moves)
-    {
-        if (b_moves > 0 && a_moves > 0)
-        {
-            rotate_both(b, a);
-            write(1, "rr\n", 3);
-            b_moves--;
-            a_moves--;
-        }
-        if (b_moves < 0 && a_moves < 0)
-        {
-            rev_rot_both(b, a);
-            write(1, "rrr\n",4);
-            b_moves++;
-            a_moves++;
-        }
-        if (b_moves > 0)
-        {
-            rotate_stack(b);
-            write(1, "rb\n", 3);
-            b_moves--;
-        }
-        else if (b_moves < 0)
-        {
-            rev_rot_stack(b);
-            write(1, "rrb\n",4);
-            b_moves++;
-        }
-        if (a_moves > 0)
-        {
-            rotate_stack(a);
-            write(1, "ra\n", 3);
-            a_moves--;
-        }
-        else if (a_moves < 0)
-        {
-            rev_rot_stack(a);
-            write(1, "rra\n",4);
-            a_moves++;
-        }
-    }
-    push_to_stack(a, b);
-    write(1, "pa\n", 3);
+void	execute_separately(t_stack **a, t_stack **b, t_moves *current)
+{
+	while (current->a_moves != 0 || current->b_moves != 0)
+	{
+		if (current->b_moves > 0)
+		{
+			rotate_stack(b, "rb\n");
+			current->b_moves--;
+		}
+		else if (current->b_moves < 0)
+		{
+			rev_rot_stack(b, "rrb\n");
+			current->b_moves++;
+		}
+		else if (current->a_moves > 0)
+		{
+			rotate_stack(a, "ra\n");
+			current->a_moves--;
+		}
+		else if (current->a_moves < 0)
+		{
+			rev_rot_stack(a, "rra\n");
+			current->a_moves++;
+		}
+	}
+}
+
+void	execute_moves(t_stack **a, t_stack **b)
+{
+	t_moves	current;
+
+	current.b_moves = 0;
+	current.a_moves = 0;
+	current.cheapest = INT_MAX;
+	update_cheapest(b, &current);
+	execute_both(a, b, &current);
+	execute_separately(a, b, &current);
+	push_to_stack(a, b, "pa\n");
 }
