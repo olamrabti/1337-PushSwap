@@ -51,7 +51,7 @@ The project follows a three-step methodology to achieve its objectives:
 
 A Longest Increasing Subsequence (LIS) is the longest sequence of numbers in an array where each number is greater than the previous one.
 
-- This video explains perfectly how to find the longest increasing subsequence: [link]
+- This video explains perfectly how to find the longest increasing subsequence: [link](https://www.youtube.com/watch?v=E6us4nmXTHs&t=643s)
 - To follow up with the example that we began with here is a schema that explains how we found our LIS.
 
 ![Alt Text](./pics/LIS.png)
