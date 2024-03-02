@@ -45,7 +45,7 @@ The project follows a three-step methodology to achieve its objectives:
 - We sort the values in an array to get the proper indexes that we're gonna work with.
 - And as a final step, we assign each node in the stack to its index according to the sorted array as explained in the picture below.
 
-![Alt Text](./pics/indexing.png)
+![Alt Text](./pics/indexing_.png)
 
 ### 2. Find the Longest Increasing Subsequence
 
