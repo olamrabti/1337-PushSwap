@@ -6,7 +6,7 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:33:09 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/03/01 21:31:46 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/03/02 11:59:25 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -46,6 +46,8 @@ int	main(int ac, char *av[])
 
 	a = NULL;
 	b = NULL;
+	if (ac <= 1)
+		return (0);
 	if (parse_args(ac, av, &a) || ac <= 1 || check_doubles(&a))
 		return (remove_list(&a), write(1, "error\n", 6), -1);
 	if (!is_sorted(&a))

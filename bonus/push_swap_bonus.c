@@ -6,7 +6,7 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:46:10 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/03/01 21:29:26 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/03/02 11:59:48 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -65,20 +65,22 @@ int	get_instructions(t_stack **a, t_stack **b, char *store)
 	j = 0;
 	sp = ft_split(store, '\n');
 	free(store);
-	if (!sp || !*sp)
-		return (-2);
+	if (!sp)
+		return (-3);
+	if (!*sp)
+		return (free(sp), -2);
 	while (sp[i])
 	{
-		if (apply_instruction(a, b, sp[i]) == -1)
+		if (apply_instruction(a, b, sp[i++]) == -1)
 		{
-			j = 0;
 			while (sp[j++])
 				;
 			return (ft_free(sp, j), -1);
 		}
-		i++;
 	}
-	return (0);
+	while (sp[j++])
+		;
+	return (ft_free(sp, j), 0);
 }
 
 void	read_input(char **store)
@@ -113,7 +115,7 @@ int	main(int ac, char *av[])
 		return (remove_list(&a), write(1, "error\n", 6), -1);
 	store = malloc(1);
 	if (!store)
-		return (-1);
+		return (remove_list(&a), -1);
 	store[0] = '\0';
 	read_input(&store);
 	if (list_len(&a) && get_instructions(&a, &b, store) == -1)
