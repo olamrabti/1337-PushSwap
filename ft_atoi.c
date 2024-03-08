@@ -51,7 +51,7 @@ int	ft_atoi(const char *str, int *checker)
 		str++;
 		*checker = 0;
 	}
-	if ((!checker && *str))
+	if ((!*checker && *str))
 		*checker = 1;
 	return ((int)(num * sign));
 }
