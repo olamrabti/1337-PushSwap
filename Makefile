@@ -6,7 +6,7 @@
 #    By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/11 10:33:31 by olamrabt          #+#    #+#              #
-#    Updated: 2024/03/02 11:59:03 by olamrabt         ###   ########.fr        #
+#    Updated: 2024/03/08 17:23:52 by olamrabt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
@@ -31,8 +31,7 @@ HEADER = push_swap.h
 
 HEADER_bonus = bonus/push_swap_bonus.h
 
-FLAGS = -Wall -Werror -Wextra 
-
+FLAGS = -Wall -Werror -Wextra
 RM = rm -f
 
 all: $(NAME)

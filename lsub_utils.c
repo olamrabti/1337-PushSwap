@@ -1,12 +1,12 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   LIS_utils.c                                        :+:      :+:    :+:   */
+/*   lsub_utils.c                                       :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 18:27:12 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/02/29 10:02:49 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/03/08 17:23:42 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -47,6 +47,7 @@ int	init_variables(t_stack **stack, t_var *var)
 		return (free_var(var), 1);
 	fill_numbers(stack, var->numbers);
 	var->i = 0;
+	var->size[var->len] = 0;
 	while (var->i < var->len)
 		var->size[var->i++] = 1;
 	var->i = 1;
