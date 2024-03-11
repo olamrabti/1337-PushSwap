@@ -58,7 +58,7 @@ A Longest Increasing Subsequence (LIS) is the longest sequence of numbers in an 
 
 ### 3. Calculate the Best Move
 
-In this step, we should have stack a with the LIS in it and the other numbers are in stack b.<br\>
+In this step, we should have stack a with the LIS in it and the other numbers are in stack b.<br>
 (rotating after pushing to stack_b if index is less than pivot is just for optimization, to get less moves especially in a stack of 500 numbers)
 
 ![Alt Text](./pics/pushtob.png)
