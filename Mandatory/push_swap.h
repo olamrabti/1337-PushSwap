@@ -6,7 +6,7 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:32:21 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/03/08 17:23:57 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:15:06 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -119,7 +119,5 @@ void	update_moves(t_stack **stack);
 void	find_closest_bigger(t_stack **a, t_stack *tmp_b);
 void	find_smallest_index(t_stack **a, t_stack *tmp_b);
 void	update_target_pos(t_stack **a, t_stack **b);
-
-// void print_stack(t_stack **list);
 
 #endif

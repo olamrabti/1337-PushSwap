@@ -6,32 +6,29 @@
 #    By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+         #
 #                                                 +#+#+#+#+#+   +#+            #
 #    Created: 2024/02/11 10:33:31 by olamrabt          #+#    #+#              #
-#    Updated: 2024/03/08 17:23:52 by olamrabt         ###   ########.fr        #
+#    Updated: 2024/03/11 12:36:38 by olamrabt         ###   ########.fr        #
 #                                                                              #
 # **************************************************************************** #
 
-SRCS = push_swap_utils.c push_swap.c rev_rot_utils.c rot_utils.c swap_utils.c push_utils.c linked_list_utils.c \
-	update_utils.c sort_utils.c ft_atoi.c lsub_utils.c best_move.c parse_utils.c ft_split.c
+SRCS = Mandatory/push_swap_utils.c Mandatory/push_swap.c Mandatory/rev_rot_utils.c Mandatory/rot_utils.c Mandatory/swap_utils.c Mandatory/push_utils.c Mandatory/linked_list_utils.c \
+	Mandatory/update_utils.c Mandatory/sort_utils.c Mandatory/ft_atoi.c Mandatory/lsub_utils.c Mandatory/best_move.c Mandatory/parse_utils.c Mandatory/ft_split.c
 
-SRCS_bonus = bonus/push_swap_bonus.c bonus/ps_gnl_bonus.c bonus/ps_gnl_utils_bonus.c push_swap_utils.c rev_rot_utils.c rot_utils.c swap_utils.c push_utils.c linked_list_utils.c \
-	update_utils.c sort_utils.c ft_atoi.c lsub_utils.c best_move.c parse_utils.c ft_split.c
-	
+SRCS_bonus = bonus/ft_atoi_bonus.c bonus/linked_list_utils_bonus.c bonus/ps_gnl_bonus.c  bonus/push_swap_bonus.c bonus/rev_rot_utils_bonus.c\
+	bonus/ft_split_bonus.c bonus/parse_utils_bonus.c  bonus/ps_gnl_utils_bonus.c  bonus/push_utils_bonus.c  bonus/rot_utils_bonus.c bonus/swap_utils_bonus.c
+
 NAME = push_swap
-
 NAME_bonus = checker
 
 OBJS = $(SRCS:.c=.o)
-
-OBJS_bonus = bonus/push_swap_bonus.o bonus/ps_gnl_bonus.o bonus/ps_gnl_utils_bonus.o push_swap_utils.o  rev_rot_utils.o rot_utils.o swap_utils.o push_utils.o linked_list_utils.o \
-	update_utils.o sort_utils.o ft_atoi.o lsub_utils.o best_move.o parse_utils.o ft_split.o
+OBJS_bonus = $(SRCS_bonus:.c=.o)
 
 CC = cc
 
-HEADER = push_swap.h
-
+HEADER = Mandatory/push_swap.h
 HEADER_bonus = bonus/push_swap_bonus.h
 
-FLAGS = -Wall -Werror -Wextra
+FLAGS = -Wall -Werror -Wextra 
+
 RM = rm -f
 
 all: $(NAME)
@@ -44,21 +41,21 @@ $(NAME): $(OBJS)
 $(NAME_bonus): $(OBJS_bonus)
 	$(CC) $(FLAGS) $(OBJS_bonus) -o $@
 
-%.o: %.c $(HEADER)
+Mandatory/%.o: Mandatory/%.c $(HEADER)
 	$(CC) $(FLAGS) -c $< -o $@
 
 bonus/%.o: bonus/%.c $(HEADER_bonus)
 	$(CC) $(FLAGS) -c $< -o $@
 
 clean:
-	$(RM) $(OBJS)
-	
+	$(RM) $(OBJS) $(OBJS_bonus)
+
 clean_bonus:
 	$(RM) $(OBJS_bonus)
 
 fclean: clean
-	$(RM) $(NAME)
-	
+	$(RM) $(NAME) $(NAME_bonus)
+
 fclean_bonus: clean_bonus
 	$(RM) $(NAME_bonus)
 
@@ -66,5 +63,4 @@ re: fclean all
 
 re_bonus: fclean_bonus bonus
 
-.PHONY: fclean clean all fclean_bonus clean_bonus re_bonus bonus
-
+.PHONY : clean clean_bonus

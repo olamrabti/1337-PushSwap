@@ -6,7 +6,7 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 18:09:43 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/03/01 21:30:04 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:12:54 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -27,6 +27,20 @@ typedef struct s_parse
 	int		checker;
 	char	**sp;
 }	t_parse;
+
+typedef struct s_var
+{
+	int	*numbers;
+	int	*indexes;
+	int	*size;
+	int	*sub;
+	int	pivot;
+	int	len;
+	int	lsub_len;
+	int	i;
+	int	j;
+	int	highest;
+}	t_var;
 
 typedef struct s_lst
 {

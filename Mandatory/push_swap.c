@@ -6,7 +6,7 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:33:09 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/03/02 11:59:25 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:14:43 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -23,6 +23,7 @@ int	push_swap(t_stack **a, t_stack **b)
 		return (sort_three(a), free_var(&var), free(var.numbers), 0);
 	if (list_len(a) == 5)
 		return (sort_five(a, b), free_var(&var), free(var.numbers), 0);
+	update_pos(a);
 	from_a_to_b(a, b, &var);
 	while (list_len(b))
 	{
@@ -49,7 +50,7 @@ int	main(int ac, char *av[])
 	if (ac <= 1)
 		return (0);
 	if (parse_args(ac, av, &a) || ac <= 1 || check_doubles(&a))
-		return (remove_list(&a), write(1, "error\n", 6), -1);
+		return (remove_list(&a), write(1, "Error\n", 6), -1);
 	if (!is_sorted(&a))
 	{
 		if (list_len(&a) == 2)

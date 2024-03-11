@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   ft_atoi.c                                          :+:      :+:    :+:   */
+/*   ft_atoi_bonus.c                                    :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 17:56:05 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/03/01 20:19:37 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:12:02 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 static int	ft_check_flow(int sign, long long num, int *checker, char c)
 {
@@ -36,7 +36,7 @@ int	ft_atoi(const char *str, int *checker)
 	sign = 1;
 	if (!*str)
 		return (0);
-	while (*str == ' ' || (*str >= 9 && *str <= 13))
+	while (*str == ' ')
 		str++;
 	if (*str == '-' || *str == '+')
 	{

@@ -1,16 +1,16 @@
 /* ************************************************************************** */
 /*                                                                            */
 /*                                                        :::      ::::::::   */
-/*   parse_utils.c                                      :+:      :+:    :+:   */
+/*   parse_utils_bonus.c                                :+:      :+:    :+:   */
 /*                                                    +:+ +:+         +:+     */
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/24 17:44:27 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/03/01 21:31:02 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:12:17 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
-#include "push_swap.h"
+#include "push_swap_bonus.h"
 
 size_t	ft_strlen(const char *str)
 {
@@ -27,15 +27,14 @@ int	check_args(t_parse *pv, t_stack **a)
 	pv->j = 0;
 	while (pv->sp[pv->j])
 	{
+		pv->checker = 1;
 		ft_atoi(pv->sp[pv->j], &pv->checker);
 		if (pv->checker)
 		{
 			while (pv->sp[pv->j++])
 				;
 			ft_free(pv->sp, pv->j);
-			if (list_len(a))
-				remove_list(a);
-			return (1);
+			return (remove_list(a), 1);
 		}
 		pv->j++;
 	}

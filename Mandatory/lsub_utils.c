@@ -6,7 +6,7 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/18 18:27:12 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/03/08 17:23:42 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/03/09 16:10:29 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -33,7 +33,7 @@ int	init_variables(t_stack **stack, t_var *var)
 	if (!stack || !var->len)
 		return (1);
 	var->len = list_len(stack);
-	var->size = malloc(var->len * sizeof(int));
+	var->size = malloc((var->len + 1) * sizeof(int));
 	if (!var->size)
 		return (1);
 	var->sub = malloc(var->len * sizeof(int));

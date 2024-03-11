@@ -6,7 +6,7 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/26 17:46:10 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/03/02 11:59:48 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/03/11 14:12:37 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -112,14 +112,14 @@ int	main(int ac, char *av[])
 	if (ac <= 1)
 		return (0);
 	if (parse_args(ac, av, &a) || check_doubles(&a))
-		return (remove_list(&a), write(1, "error\n", 6), -1);
+		return (remove_list(&a), write(1, "Error\n", 6), -1);
 	store = malloc(1);
 	if (!store)
 		return (remove_list(&a), -1);
 	store[0] = '\0';
 	read_input(&store);
 	if (list_len(&a) && get_instructions(&a, &b, store) == -1)
-		return (remove_list(&b), remove_list(&a), write(1, "error\n", 6), -1);
+		return (remove_list(&b), remove_list(&a), write(1, "Error\n", 6), -1);
 	if (is_sorted(&a) && list_len(&b) == 0)
 		return (remove_list(&b), remove_list(&a), write(1, "OK\n", 3), 0);
 	return (remove_list(&b), remove_list(&a), write(1, "KO\n", 3), 0);

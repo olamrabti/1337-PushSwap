@@ -6,7 +6,7 @@
 /*   By: olamrabt <olamrabt@student.42.fr>          +#+  +:+       +#+        */
 /*                                                +#+#+#+#+#+   +#+           */
 /*   Created: 2024/02/11 10:33:25 by olamrabt          #+#    #+#             */
-/*   Updated: 2024/02/29 12:04:32 by olamrabt         ###   ########.fr       */
+/*   Updated: 2024/03/10 10:28:56 by olamrabt         ###   ########.fr       */
 /*                                                                            */
 /* ************************************************************************** */
 
@@ -59,15 +59,19 @@ void	rearrange_a(t_stack **a, int i)
 
 void	from_a_to_b(t_stack **a, t_stack **b, t_var *var)
 {
-	int	pivot;
 	int	*lsub;
+	int	pivot;
 
-	pivot = list_len(a) / 2;
 	lsub = lsub_algo(var);
-	while (list_len(a) > var->lsub_len)
+	pivot = list_len(a) / 2;
+	while (var->lsub_len < list_len(a))
 	{
 		if (!is_in_lsub(*a, var, lsub))
+		{
 			push_to_stack(b, a, "pb\n");
+			if ((*b)->index < pivot)
+				rotate_stack(b, "rb\n");
+		}
 		else
 			rotate_stack(a, "ra\n");
 	}
@@ -81,7 +85,7 @@ void	sort_five(t_stack **a, t_stack **b)
 	if ((*a)->index)
 		rearrange_a(a, 0);
 	push_to_stack(b, a, "pb\n");
-	if ((*a)->index != 1)
+	if (list_len(a) > 3 && (*a)->index != 1)
 		rearrange_a(a, 1);
 	if (is_sorted(a))
 	{
